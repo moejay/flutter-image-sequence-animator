@@ -94,6 +94,9 @@ class ImageSequenceAnimator extends StatefulWidget {
   ///The callback for when the [ImageSequenceAnimator] finishes playing.
   final ImageSequenceProcessCallback onFinishPlaying;
 
+  ///Headers to use with the network request
+  final Map<String, String> httpHeaders;
+
   const ImageSequenceAnimator(
     this.folderName,
     this.fileName,
@@ -115,6 +118,7 @@ class ImageSequenceAnimator extends StatefulWidget {
     this.onStartPlaying,
     this.onPlaying,
     this.onFinishPlaying,
+    this.httpHeaders,
   }) : super(key: key);
 
   @override
@@ -429,6 +433,7 @@ class ImageSequenceAnimatorState extends State<ImageSequenceAnimator> with Singl
                     return Container();
                 },
                 color: Colors.transparent,
+                httpHeaders: widget.httpHeaders,
               );
             }
           } else
@@ -441,6 +446,7 @@ class ImageSequenceAnimatorState extends State<ImageSequenceAnimator> with Singl
                 _currentDisplayedOnlineFrame = CachedNetworkImage(
                   imageUrl: _getDirectory(),
                   color: color,
+                  httpHeaders: widget.httpHeaders,
                   useOldImageOnUrlChange: _isCacheComplete,
                   fadeOutDuration: const Duration(milliseconds: 0),
                   fadeInDuration: const Duration(milliseconds: 0),
